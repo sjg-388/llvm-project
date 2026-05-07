@@ -1933,7 +1933,7 @@ uint64_t WasmObjectFile::getWasmSymbolValue(const WasmSymbol &Sym) const {
     uint32_t SegmentIndex = Sym.Info.DataRef.Segment;
     const wasm::WasmDataSegment &Segment = DataSegments[SegmentIndex].Data;
     if (Segment.Offset.Extended) {
-      llvm_unreachable("extended init exprs not supported");
+      return Sym.Info.DataRef.Offset;
     } else if (Segment.Offset.Inst.Opcode == wasm::WASM_OPCODE_I32_CONST) {
       return Segment.Offset.Inst.Value.Int32 + Sym.Info.DataRef.Offset;
     } else if (Segment.Offset.Inst.Opcode == wasm::WASM_OPCODE_I64_CONST) {
